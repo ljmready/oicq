@@ -21,7 +21,7 @@ io.on('connection', function (socket) {
     name:false,
     color:getColor()
   }
-  
+  var onlines={};
   // 对message事件的监听
   socket.on('message', function(msg){
     var obj = {time:getTime(),color:client.color};
@@ -33,7 +33,11 @@ io.on('connection', function (socket) {
         obj['author']='System';
         obj['type']='welcome';
         console.log(client.name + ' login');
-
+        //将用户名存进内存
+        onlines['author']=msg;
+       
+        socket.emit('online',onlines);
+        console.log("test2");
         //返回欢迎语
         socket.emit('system',obj);
         //广播新用户已登陆
@@ -52,7 +56,9 @@ io.on('connection', function (socket) {
         socket.broadcast.emit('message',obj);
       }
     });
-
+  socket.on('online',function(onlines){
+      console.log("test3");
+  });
     //监听出退事件
     socket.on('disconnect', function () {  
       var obj = {

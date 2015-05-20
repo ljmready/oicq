@@ -16,9 +16,9 @@
         var p = '';
         if (json.type === 'welcome'){
             if(myName==json.text) status.text(myName + ': ').addClass("label label-success");
-            p = '<p style="background:'+json.color+'"class="label label-success">system  @ '+ json.time+ ' : Welcome ' + json.text +'</p>';
+            p = '<p class="label label-success">system  @ '+ json.time+ ' : Welcome ' + json.text +'</p>';
         }else if(json.type == 'disconnect'){
-            p = '<p style="background:'+json.color+'">system  @ '+ json.time+ ' : Bye ' + json.text +'</p>';
+            p = '<p>system  @ '+ json.time+ ' : Bye ' + json.text +'</p>';
         }
         content.prepend(p); 
     });
